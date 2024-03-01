@@ -11,7 +11,7 @@ This repository contains a NextJS application for a simple shopping list. The ap
 
 ## Local Development
 
-To use the Shopping List Component in your project, follow these steps:
+To use the Shopping List application, follow these steps:
 
 1. Clone the repository:
 
