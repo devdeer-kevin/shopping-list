@@ -65,7 +65,7 @@ export default function ShoppingListComponent(): ReactElement {
         const itemsParam = urlParams.get('items')
         // Log the items
         const itemsParamArray = itemsParam ? itemsParam.split(',') : []
-
+        // Set the items in the state
         setItemsArray([...itemsParamArray])
     }
 
@@ -73,6 +73,7 @@ export default function ShoppingListComponent(): ReactElement {
     const addItem = () => {
         // Check if the item already exists in the list
         if (!isInputValid() && inputValue.trim()) {
+            // Save the items
             saveItems(inputValue)
             setInputValue('')
             setInvalidInput(false)
@@ -84,6 +85,7 @@ export default function ShoppingListComponent(): ReactElement {
         // Check if the item already exists in the list
         if (event.key === 'Enter') {
             if (!isInputValid() && inputValue.trim()) {
+                // Save the items
                 saveItems(inputValue)
                 setInputValue('')
                 setInvalidInput(false)
@@ -93,10 +95,13 @@ export default function ShoppingListComponent(): ReactElement {
 
     // Method to remove item from the shopping list array by button click
     const removeItem = (event: MouseEvent<HTMLButtonElement>) => {
+        // Remove the item from the array
         const index = itemsArray.indexOf(event.currentTarget.previousElementSibling?.getAttribute('placeholder')!)
+        // Remove the item from the array
         itemsArray.splice(index, 1)
+        // Set the items in the state
         setItemsArray([...itemsArray])
-        // setUrlItems([...itemsArray])
+        // Update the URL
         updateURL([...itemsArray])
     }
 
