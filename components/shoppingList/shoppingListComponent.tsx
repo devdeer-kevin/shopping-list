@@ -45,6 +45,7 @@ export default function ShoppingListComponent(): ReactElement {
         return false
     }
 
+    // Method to save the items by updating the state and the URL
     const saveItems = (inputValue: string) => {
         setItemsArray([...itemsArray, inputValue])
         updateURL([...itemsArray, inputValue])
