@@ -8,6 +8,7 @@ This repository contains a NextJS application for a simple shopping list. The ap
 -   Validate input to prevent duplicate items
 -   Remove items from the shopping list
 -   Display a warning for invalid input
+-   Items are saved in the URLSearchParams for easy shopping list sharing
 
 ## Local Development
 
