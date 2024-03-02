@@ -25,7 +25,7 @@ export default function ShoppingListComponent(): ReactElement {
         const itemsParam = urlParams.get('items')
         // Log the items
         const itemsArray = itemsParam ? itemsParam.split(',') : []
-
+        // Set the items in the state
         setItemsArray([...itemsArray])
     }, [])
 
