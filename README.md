@@ -1,6 +1,6 @@
-# Shopping List Component
+# Shopping List Application
 
-This repository contains a React component for a simple shopping list application. The component allows users to add items to a shopping list, check for duplicate entries, and remove items from the list. It showcases basic React state management, event handling, and conditional rendering.
+This repository contains a NextJS application for a simple shopping list. The app allows users to add items to a shopping list, check for duplicate entries, and remove items from the list. It showcases basic React state management, event handling, and conditional rendering.
 
 ## Features
 
@@ -11,7 +11,7 @@ This repository contains a React component for a simple shopping list applicatio
 
 ## Local Development
 
-To use the Shopping List Component in your project, follow these steps:
+To use the Shopping List application, follow these steps:
 
 1. Clone the repository:
 
