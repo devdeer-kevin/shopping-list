@@ -4,8 +4,6 @@ This repository contains a NextJS application for a simple shopping list. The ap
 
 ## Features
 
-## Features
-
 -   **Dynamic Shopping List Management:** Allows users to dynamically add, display, and remove items from their shopping list.
 -   **API Integration:** Fetches existing items from an API on initial load and supports adding or deleting items through API requests.
 -   **Persistent URL Updates:** Updates the URL with current shopping list items for easy sharing and bookmarking.
