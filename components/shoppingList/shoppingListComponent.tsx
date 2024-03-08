@@ -178,7 +178,7 @@ export default function ShoppingListComponent(): ReactElement {
             <div className="sm:py-8 py-2 px-4 flex flex-row gap-4 items-center">
                 <h2 className="full text-3xl text-red-400 text-left font-mono font-thin">Shopping List</h2>
                 <button onClick={copyURLToClipboard} className="text-slate-950 bg-red-400 p-2 rounded-lg">
-                    {clickShare ? '✅ URL copied to clipboard' : '🔗 Copy to clipboard'}
+                    {clickShare ? '✅ URL copied to clipboard' : '🔗 Copy URL to clipboard'}
                 </button>
             </div>
             <div className="flex sm:flex-row flex-col sm:gap-6 gap-2">
