@@ -65,15 +65,11 @@ export default function ShoppingListComponent(): ReactElement {
         const itemsParam = urlParams.get('items')
         // Log the items
         const itemsParamArray = itemsParam ? itemsParam.split(',') : []
-        // Check if the items array is empty
-        if (itemsParamArray.length === 0) {
-            // Fetch the API
-            fetchAPI()
-        } else {
-            // Set the items in the state
-            setItemsArray([...itemsParamArray])
-        }
-    }, [itemsArray])
+        // Set the items with the items from the URL
+        setItemsArray([...itemsParamArray])
+        // Fetch the API
+        fetchAPI()
+    }, [])
 
     // Method to handle input change
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
