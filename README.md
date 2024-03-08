@@ -1,6 +1,6 @@
 # Shopping List Application
 
-Built with NextJS, now features enhanced usability and interactivity, offering backend API integration for live data synchronization, unique URL generation for easy sharing, and advanced input validation to prevent duplicates. An improved user interface, responsive design, and clipboard functionality for quick URL sharing elevate the user experience. Utilizing React hooks for state management and efficient URL parameter handling, this application provides a streamlined and accessible approach to managing shopping lists in the digital age.
+Built with NextJS, now features enhanced usability and interactivity, offering backend API integration for live data synchronization, unique URL generation for easy sharing, and advanced input validation to prevent duplicates. An improved user interface, responsive design, and clipboard functionality for quick URL sharing elevate the user experience. Utilizing React hooks for state management and efficient URL parameter handling.
 
 ## Features
 
