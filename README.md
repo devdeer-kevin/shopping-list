@@ -1,6 +1,6 @@
 # Shopping List Application
 
-This repository contains a NextJS application for a simple shopping list. The app allows users to add items to a shopping list, check for duplicate entries, and remove items from the list. It showcases basic React state management, event handling, and conditional rendering.
+Built with NextJS, now features enhanced usability and interactivity, offering backend API integration for live data synchronization, unique URL generation for easy sharing, and advanced input validation to prevent duplicates. An improved user interface, responsive design, and clipboard functionality for quick URL sharing elevate the user experience. Utilizing React hooks for state management and efficient URL parameter handling, this application provides a streamlined and accessible approach to managing shopping lists in the digital age.
 
 ## Features
 
