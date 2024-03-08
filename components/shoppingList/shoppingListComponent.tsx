@@ -16,6 +16,46 @@ export default function ShoppingListComponent(): ReactElement {
     const [inputValue, setInputValue] = useState('')
     // State to hold the invalid input
     const [invalidInput, setInvalidInput] = useState(false)
+    // State if the share button is clicked
+    const [clickShare, setClickShare] = useState(false)
+    // State of loading
+    const [loading, setLoading] = useState(false)
+
+    // Method to fetch the API
+    const fetchAPI = async () => {
+        setLoading(true)
+        const response = await fetch('/api/items', {
+            method: 'GET',
+        })
+        const data = await response.json()
+        const fetchedItems = data.items.map((item: any) => item.name)
+        setItemsArray(fetchedItems)
+        setLoading(false)
+    }
+
+    const postToAPI = async (data: string) => {
+        setLoading(true)
+        const response = await fetch('/api/items', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: data }),
+        })
+        setLoading(false)
+    }
+
+    const deleteFromAPI = async (data: string) => {
+        setLoading(true)
+        const response = await fetch('/api/items', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: data }),
+        })
+        setLoading(false)
+    }
 
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
@@ -24,10 +64,16 @@ export default function ShoppingListComponent(): ReactElement {
         // Get the items from the URL
         const itemsParam = urlParams.get('items')
         // Log the items
-        const itemsArray = itemsParam ? itemsParam.split(',') : []
-        // Set the items in the state
-        setItemsArray([...itemsArray])
-    }, [])
+        const itemsParamArray = itemsParam ? itemsParam.split(',') : []
+        // Check if the items array is empty
+        if (itemsParamArray.length === 0) {
+            // Fetch the API
+            fetchAPI()
+        } else {
+            // Set the items in the state
+            setItemsArray([...itemsParamArray])
+        }
+    }, [itemsArray])
 
     // Method to handle input change
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +94,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to save the items by updating the state and the URL
     const saveItems = (inputValue: string) => {
         setItemsArray([...itemsArray, inputValue])
+        postToAPI(inputValue)
         updateURL([...itemsArray, inputValue])
     }
 
@@ -101,48 +148,80 @@ export default function ShoppingListComponent(): ReactElement {
         itemsArray.splice(index, 1)
         // Set the items in the state
         setItemsArray([...itemsArray])
+        // Delete the item from the API
+        deleteFromAPI(event.currentTarget.previousElementSibling?.getAttribute('placeholder')!)
         // Update the URL
         updateURL([...itemsArray])
     }
 
+    // Method to copy the URL to the clipboard
+    const copyURLToClipboard = () => {
+        const url = window.location.href
+        navigator.clipboard
+            .writeText(url)
+            .then(() => {
+                console.log('URL copied to clipboard')
+            })
+            .catch((error) => {
+                console.error('Failed to copy URL to clipboard:', error)
+            })
+        setClickShare(true)
+    }
+
+    // Method to capitalize the first character of a string
+    const capitalizeFirstChar = (str: string) => {
+        return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
     return (
-        <div className="flex flex-col gap-3 mx-auto justify-between">
-            <h2 className="text-3xl font-bold text-left">Shopping List</h2>
-            <div className="border-2 w-full border-orange-400"></div>
-            <div className="grid gap-2 w-full">
-                <div className="grid grid-flow-col gap-2">
-                    <input
-                        className="border-2 border-blue-950 bg-transparent p-2 rounded-lg text-blue-950 placeholder:text-blue-950"
-                        placeholder="Add Shopping Item"
-                        value={inputValue}
-                        onChange={handleInputChange}
-                        onKeyDown={handleKeyDown}
-                        onFocus={() => setInvalidInput(false)}
-                    />
-                    <button onClick={addItem} className="text-blue-950 border-2 border-blue-950 p-2 rounded-lg w-10">
-                        +
-                    </button>
-                </div>
-                {invalidInput && (
-                    <div className="bg-pink-500 text-center p-1 rounded-full text-sm font-bold text-pink-100">
-                        <div>
-                            <p>Ups, you already got this on your list.</p>
+        <div>
+            <div className="sm:py-8 py-2 px-4 flex flex-row gap-4 items-center">
+                <h2 className="full text-3xl text-red-400 text-left font-mono font-thin">Shopping List</h2>
+                <button onClick={copyURLToClipboard} className="text-slate-950 bg-red-400 p-2 rounded-lg">
+                    {clickShare ? '✅ URL copied to clipboard' : '🔗 Copy URL to clipboard'}
+                </button>
+            </div>
+            <div className="flex sm:flex-row flex-col sm:gap-6 gap-2">
+                <div className="flex flex-col gap-2 sm:border-r-2 border-r-0 border-t-2 sm:border-t-0 sm:px-4 px-0 sm:pt-0 pt-4 w-full border-slate-500">
+                    <div className="grid gap-2 w-full">
+                        <div className="grid grid-flow-col gap-2 font-mono">
+                            <input
+                                className="border-2 border-yellow-500 bg-transparent p-2 rounded-lg text-yellow-500 placeholder:text-yellow-500"
+                                placeholder="Add Shopping Item"
+                                value={inputValue}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
+                                onFocus={() => setInvalidInput(false)}
+                            />
+                            <button onClick={addItem} className="text-yellow-500 border-2 border-yellow-500 p-2 rounded-lg w-10">
+                                +
+                            </button>
                         </div>
+                        {invalidInput && (
+                            <div className="bg-pink-500 text-center p-1 rounded-full text-sm font-bold text-pink-100 font-mono">
+                                <div>
+                                    <p>This item already exists.</p>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                )}
-                {itemsArray.map((shoppingItem: string, i: Key | null | undefined) => (
-                    <div key={i} className="grid grid-flow-col gap-2">
-                        <input
-                            disabled
-                            className="border-2 border-blue-950 bg-blue-950 p-2 rounded-lg text-slate-50 placeholder:text-slate-50 font-bold"
-                            type="text"
-                            placeholder={shoppingItem}
-                        />
-                        <button onClick={removeItem} className="text-slate-50 border-2 border-blue-950 bg-blue-950 p-2 rounded-lg w-10">
-                            -
-                        </button>
-                    </div>
-                ))}
+                </div>
+                <div className="grid grid-flow-row gap-2 font-mono">
+                    {loading && <div className="grid grid-flow-col gap-3 animate-spin text-4xl h-9 w-9">🌀</div>}
+                    {[...itemsArray].reverse().map((shoppingItem: string, i: Key | null | undefined) => (
+                        <div key={i} className="grid grid-flow-col gap-3">
+                            <input
+                                disabled
+                                className="border-2 border-blue-700 bg-blue-700 p-2 rounded-lg text-slate-950 placeholder:text-slate-950 font-bold"
+                                type="text"
+                                placeholder={capitalizeFirstChar(shoppingItem)}
+                            />
+                            <button onClick={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
+                                -
+                            </button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
