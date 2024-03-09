@@ -59,10 +59,8 @@ To set up your local development environment and contribute to the project, plea
 
 5. **Open the Project**: Your Shopping List application should now be up and running. Open your favorite browser and head over to [http://localhost:3000](http://localhost:3000).
 
-Congratulations! 🎉 You are now ready to contribute to the Shopping List project. Let's make shopping fun and organized!
-
 ### Feedback and Collaboration 💡
 
-We highly value your input and strongly encourage collaboration. If you have any suggestions, ideas, or would like to contribute to the project, please feel free to reach out or submit a pull request. Together, we can make the Shopping List Application even better for everyone!
+I highly value your input and strongly encourage collaboration. If you have any suggestions, ideas, or would like to contribute to the project, please feel free to reach out or submit a pull request.
 
-Let's create something amazing together! 🚀
+Congratulations! 🎉 You are now ready to contribute to the Shopping List project. Let's make shopping fun and organized!
