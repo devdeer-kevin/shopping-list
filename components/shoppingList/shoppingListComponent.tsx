@@ -33,6 +33,7 @@ export default function ShoppingListComponent(): ReactElement {
         setLoading(false)
     }
 
+    // Method to post to the API
     const postToAPI = async (data: string) => {
         setLoading(true)
         const response = await fetch('/api/items', {
@@ -45,6 +46,7 @@ export default function ShoppingListComponent(): ReactElement {
         setLoading(false)
     }
 
+    // Method to delete from the API
     const deleteFromAPI = async (data: string) => {
         setLoading(true)
         const response = await fetch('/api/items', {
@@ -64,9 +66,9 @@ export default function ShoppingListComponent(): ReactElement {
         // Get the items from the URL
         const itemsParam = urlParams.get('items')
         // Log the items
-        const itemsParamArray = itemsParam ? itemsParam.split(',') : []
+        const itemsFromParam = itemsParam ? itemsParam.split(',') : []
         // Set the items with the items from the URL
-        setItemsArray([...itemsParamArray])
+        setItemsArray([...itemsFromParam])
         // Fetch the API
         fetchAPI()
     }, [])
