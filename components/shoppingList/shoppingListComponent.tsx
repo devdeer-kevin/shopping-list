@@ -128,7 +128,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to handle key down event
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         // Check if the item already exists in the list
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' || event.key === 'NumpadEnter') {
             if (!isInputValid() && inputValue.trim()) {
                 // Save the items
                 saveItems(inputValue)
