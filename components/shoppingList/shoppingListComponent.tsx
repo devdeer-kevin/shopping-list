@@ -24,7 +24,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to fetch the API
     const fetchAPI = async () => {
         setLoading(true)
-        const response = await fetch('/api/items', {
+        const response = await fetch('/api/v1/items', {
             method: 'GET',
         })
         const data = await response.json()
@@ -36,7 +36,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to post to the API
     const postToAPI = async (data: string) => {
         setLoading(true)
-        const response = await fetch('/api/items', {
+        const response = await fetch('/api/v1/items', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to delete from the API
     const deleteFromAPI = async (data: string) => {
         setLoading(true)
-        const response = await fetch('/api/items', {
+        const response = await fetch('/api/v1/items', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

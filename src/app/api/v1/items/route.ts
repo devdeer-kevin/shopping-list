@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import items from '../../../../items.json'
+import items from '../../../../../items.json'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
     // Read the file
-    const filePath = path.resolve(__dirname, '../../../../items.json')
+    const filePath = path.resolve(__dirname, '../../../../../items.json')
 
     let currentData
     try {
@@ -135,7 +135,7 @@ export async function DELETE(request: Request) {
     // File path to the items.json file
     const __dirname = path.dirname(new URL(import.meta.url).pathname)
     // Read the file
-    const filePath = path.resolve(__dirname, '../../../../items.json')
+    const filePath = path.resolve(__dirname, '../../../../../items.json')
 
     let currentData
     try {
