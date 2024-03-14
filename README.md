@@ -59,6 +59,20 @@ To set up your local development environment and contribute to the project, plea
 
 5. **Open the Project**: Your Shopping List application should now be up and running. Open your favorite browser and head over to [http://localhost:3000](http://localhost:3000).
 
+### Note on Swagger UI React in Terminal/Console
+
+When working with the `swagger-ui-react` package, developers might encounter the following message in their terminal or console:
+
+```
+⨯ node_modules/swagger-ui-react/swagger-ui-bundle.js (2:815852) @ File
+```
+
+This message is a **warning**, not an error. It is related to the `swagger-ui-bundle.js` file included with the `swagger-ui-react` package. Please be assured that this warning is **harmless** and does not impact the functionality of the Swagger UI in your project. It appears due to the specific way `swagger-ui-react` is packaged and integrated into the development environment.
+
+If you see this warning, you can continue to work on your project without concerns. The Swagger UI should operate as expected, allowing you to document and test your API directly in your browser.
+
+Should you have any further questions or require assistance, please do not hesitate to reach out.
+
 ### Feedback and Collaboration 💡
 
 I highly value your input and strongly encourage collaboration. If you have any suggestions, ideas, or would like to contribute to the project, please feel free to reach out or submit a pull request.

@@ -4,7 +4,13 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 
 /**
- * Retrieves the list of items.
+ * @swagger
+ * /api/v1/items:
+ *   get:
+ *     description: Retrieves the list of items.
+ *     responses:
+ *       200:
+ *         description: A NextResponse object with the list of items.
  * @returns A NextResponse object with the list of items.
  */
 export async function GET() {
@@ -16,7 +22,17 @@ export async function GET() {
 }
 
 /**
- * Adds a new item to the list.
+ * @swagger
+ * /api/v1/items:
+ *   post:
+ *     description: Adds a new item to the list.
+ *     responses:
+ *       201:
+ *         description: A NextResponse object with the updated list of items.
+ *       400:
+ *         description: Invalid request.
+ *       500:
+ *         description: Failed to read the item file.
  * @param request - The request object containing the new item data.
  * @returns A NextResponse object with the updated list of items.
  */
@@ -100,7 +116,17 @@ export async function POST(request: Request) {
 }
 
 /**
- * Deletes an item from the list.
+ * @swagger
+ * /api/v1/items:
+ *   delete:
+ *     description: Deletes an item from the list.
+ *     responses:
+ *       200:
+ *         description: A NextResponse object with the updated list of items.
+ *       400:
+ *         description: Invalid request.
+ *       500:
+ *         description: Failed to read the item file.
  * @param request - The request object containing the item to be deleted.
  * @returns A NextResponse object with the updated list of items.
  */
