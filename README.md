@@ -14,7 +14,7 @@ Built with NextJS, now features enhanced usability and interactivity, offering b
 -   **Responsive Design 📱**: Adapts to different screen sizes for a consistent user experience across devices.
 -   **Visual Feedback ✨**: Provides immediate visual feedback on actions such as copying the URL or detecting duplicate items.
 -   **State Management 🛠️**: Utilizes React hooks for efficient state management and updates throughout the component lifecycle.
--   **Interactive API Documentation with Swagger UI 📄**: Visit our Swagger UI at `[http://localhost:3000/api-docs](http://localhost:3000/api-docs)` to explore and test our API endpoints directly from your browser.
+-   **Interactive API Documentation with Swagger UI 📄**: Visit the Swagger UI at `[http://localhost:3000/api-docs](http://localhost:3000/api-docs)` to explore and test the API endpoints directly from your browser.
 
 ### Local Development Instructions for the Shopping List Project 🛠️
 
