@@ -212,7 +212,7 @@ export default function ShoppingListComponent(): ReactElement {
                                 disabled
                                 className="border-2 border-blue-700 bg-blue-700 p-2 rounded-lg text-slate-950 placeholder:text-slate-950 font-bold"
                                 type="text"
-                                placeholder={capitalizeFirstChar(shoppingItem)}
+                                placeholder={shoppingItem}
                             />
                             <button onClick={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
                                 -
