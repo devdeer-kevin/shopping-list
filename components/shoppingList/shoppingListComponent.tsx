@@ -61,15 +61,10 @@ export default function ShoppingListComponent(): ReactElement {
 
     // Method to get the items from the URL and set them in the state
     const fetchURL = async () => {
-        setLoading(true)
-        const urlParams = new URLSearchParams(window.location.search)
-        // Get the items from the URL
-        const itemsParam = urlParams.get('items')
-        // Log the items
-        const itemsFromParam = itemsParam ? itemsParam.split(',') : []
+        // Get the items from the URL and set them in an array
+        const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
         // Set the items with the items from the URL
-        setItemsArray([...itemsFromParam])
-        setLoading(false)
+        setItemsArray([...urlParams])
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
