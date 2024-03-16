@@ -1,6 +1,5 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
 import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEvent, Key } from 'react'
 
 /**
@@ -21,8 +20,6 @@ export default function ShoppingListComponent(): ReactElement {
     const [clickShare, setClickShare] = useState(false)
     // State of loading
     const [loading, setLoading] = useState(false)
-    // Use search params
-    const urlParams = useSearchParams()
 
     // Method to fetch the API
     const fetchAPI = async () => {
@@ -62,14 +59,17 @@ export default function ShoppingListComponent(): ReactElement {
         setLoading(false)
     }
 
-    // Method to get the items from the URL and set them in the state when the component mounts
+    // Method to get the items from the URL and set them in the state
     const fetchURL = async () => {
+        setLoading(true)
+        const urlParams = new URLSearchParams(window.location.search)
         // Get the items from the URL
         const itemsParam = urlParams.get('items')
         // Log the items
         const itemsFromParam = itemsParam ? itemsParam.split(',') : []
         // Set the items with the items from the URL
         setItemsArray([...itemsFromParam])
+        setLoading(false)
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
@@ -105,20 +105,14 @@ export default function ShoppingListComponent(): ReactElement {
 
     // Method to update the URL with the inputValue
     const updateURL = (urlItems: string[]) => {
-        // Update the URL with the items
+        // Get the URL with the current items
         const url = new URL(window.location.href)
         // Set the items in the URL
         url.searchParams.set('items', urlItems.join(','))
         // Replace the URL
         window.history.replaceState(null, '', url.toString())
-        // Log every item in the URL
-        const urlParams = new URLSearchParams(window.location.search)
-        // Get the items from the URL
-        const itemsParam = urlParams.get('items')
-        // Log the items
-        const itemsParamArray = itemsParam ? itemsParam.split(',') : []
-        // Set the items in the state
-        setItemsArray([...itemsParamArray])
+        // Set items from the URL in the state
+        fetchURL()
     }
 
     // Method to add item to the shopping list array
