@@ -165,12 +165,11 @@ export default function ShoppingListComponent(): ReactElement {
         navigator.clipboard
             .writeText(url)
             .then(() => {
-                console.log('URL copied to clipboard')
+                setClickShare(true)
             })
             .catch((error) => {
                 console.error('Failed to copy URL to clipboard:', error)
             })
-        setClickShare(true)
     }
 
     return (
