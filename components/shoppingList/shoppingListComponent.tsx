@@ -59,16 +59,18 @@ export default function ShoppingListComponent(): ReactElement {
         setLoading(false)
     }
 
+    // Method to get the items from the URL and set them in the state
+    const fetchURL = async () => {
+        // Get the items from the URL and set them in an array
+        const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
+        // Set the items with the items from the URL
+        setItemsArray([...urlParams])
+    }
+
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
-        // Log every item in the URL
-        const urlParams = new URLSearchParams(window.location.search)
-        // Get the items from the URL
-        const itemsParam = urlParams.get('items')
-        // Log the items
-        const itemsFromParam = itemsParam ? itemsParam.split(',') : []
-        // Set the items with the items from the URL
-        setItemsArray([...itemsFromParam])
+        // Get the items from the URL and set them in the state
+        fetchURL()
         // Fetch the API
         fetchAPI()
     }, [])
@@ -98,20 +100,14 @@ export default function ShoppingListComponent(): ReactElement {
 
     // Method to update the URL with the inputValue
     const updateURL = (urlItems: string[]) => {
-        // Update the URL with the items
+        // Get the URL with the current items
         const url = new URL(window.location.href)
         // Set the items in the URL
         url.searchParams.set('items', urlItems.join(','))
         // Replace the URL
         window.history.replaceState(null, '', url.toString())
-        // Log every item in the URL
-        const urlParams = new URLSearchParams(window.location.search)
-        // Get the items from the URL
-        const itemsParam = urlParams.get('items')
-        // Log the items
-        const itemsParamArray = itemsParam ? itemsParam.split(',') : []
-        // Set the items in the state
-        setItemsArray([...itemsParamArray])
+        // Set items from the URL in the state
+        fetchURL()
     }
 
     // Method to add item to the shopping list array
@@ -158,17 +154,11 @@ export default function ShoppingListComponent(): ReactElement {
         navigator.clipboard
             .writeText(url)
             .then(() => {
-                console.log('URL copied to clipboard')
+                setClickShare(true)
             })
             .catch((error) => {
                 console.error('Failed to copy URL to clipboard:', error)
             })
-        setClickShare(true)
-    }
-
-    // Method to capitalize the first character of a string
-    const capitalizeFirstChar = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
     return (
