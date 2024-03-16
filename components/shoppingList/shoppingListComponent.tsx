@@ -1,5 +1,6 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEvent, Key } from 'react'
 
 /**
@@ -20,6 +21,8 @@ export default function ShoppingListComponent(): ReactElement {
     const [clickShare, setClickShare] = useState(false)
     // State of loading
     const [loading, setLoading] = useState(false)
+    // Use search params
+    const urlParams = useSearchParams()
 
     // Method to fetch the API
     const fetchAPI = async () => {
@@ -60,15 +63,19 @@ export default function ShoppingListComponent(): ReactElement {
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
-    useEffect(() => {
-        // Log every item in the URL
-        const urlParams = new URLSearchParams(window.location.search)
+    const fetchURL = async () => {
         // Get the items from the URL
         const itemsParam = urlParams.get('items')
         // Log the items
         const itemsFromParam = itemsParam ? itemsParam.split(',') : []
         // Set the items with the items from the URL
         setItemsArray([...itemsFromParam])
+    }
+
+    // Method to get the items from the URL and set them in the state when the component mounts
+    useEffect(() => {
+        // Get the items from the URL and set them in the state
+        fetchURL()
         // Fetch the API
         fetchAPI()
     }, [])
@@ -164,11 +171,6 @@ export default function ShoppingListComponent(): ReactElement {
                 console.error('Failed to copy URL to clipboard:', error)
             })
         setClickShare(true)
-    }
-
-    // Method to capitalize the first character of a string
-    const capitalizeFirstChar = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
     return (
