@@ -148,29 +148,10 @@ export default function ShoppingListComponent(): ReactElement {
         updateURL([...itemsArray])
     }
 
-    // Method to copy the URL to the clipboard
-    const copyURLToClipboard = () => {
-        const url = window.location.href
-        navigator.clipboard
-            .writeText(url)
-            .then(() => {
-                setClickShare(true)
-            })
-            .catch((error) => {
-                console.error('Failed to copy URL to clipboard:', error)
-            })
-    }
-
     return (
         <div>
-            <div className="sm:py-8 py-4 flex sm:flex-row flex-col sm:gap-4 gap-2 sm:items-center items-ends justify-between">
-                <h2 className="sm:pl-4 pl-0 full text-3xl text-red-400 sm:text-left text-center font-mono font-thin">Shopping List</h2>
-                <button onClick={copyURLToClipboard} className="text-slate-950 bg-red-400 py-2 px-4 rounded-lg text-sm">
-                    {clickShare ? '✅ URL copied to clipboard' : '🔗 Copy URL to clipboard'}
-                </button>
-            </div>
             <div className="flex sm:flex-row flex-col sm:gap-6 gap-2">
-                <div className="flex flex-col gap-2 sm:border-r-2 border-r-0 border-t-2 sm:border-t-0 sm:px-4 px-0 sm:pt-0 pt-4 w-full border-slate-500">
+                <div className="flex flex-col gap-2 sm:border-r-2 border-r-0 sm:px-4 px-0 sm:pt-0 pt-4 w-full border-slate-500">
                     <div className="grid gap-2 w-full">
                         <div className="grid grid-flow-col gap-2 font-mono">
                             <input
