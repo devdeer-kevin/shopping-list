@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, ReactElement, Key } from 'react'
+import useItemsStore from '../../store/store'
 
 /**
  * Shopping List Component
@@ -10,6 +11,7 @@ import { useState, useEffect, ReactElement, Key } from 'react'
  * @returns {ReactElement} The Shopping List Component
  */
 export default function NavigationComponent(): ReactElement {
+    const store = useItemsStore()
     // State to hold the shopping list array
     const [itemsArray, setItemsArray] = useState([] as string[])
     // State if the share button is clicked
@@ -21,8 +23,12 @@ export default function NavigationComponent(): ReactElement {
     const fetchURL = async () => {
         // Get the items from the URL and set them in an array
         const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
+        // Convert the urlParams array of strings to an array of Item objects
+        const items = urlParams.map((item: string) => ({ name: item }))
         // Set the items with the items from the URL
         setItemsArray([...urlParams])
+        // Set the items in the store
+        store.items = items
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
@@ -66,9 +72,9 @@ export default function NavigationComponent(): ReactElement {
                     </div>
                     <ul>
                         {itemsArray.length <= 1 && <li className="text-slate-600 py-2 px-4 text-sm font-mono">no items</li>}
-                        {[...itemsArray].reverse().map((shoppingItem: string, i: Key | null | undefined) => (
+                        {store.items.map((shoppingItem: { name: string }, i: Key | null | undefined) => (
                             <li key={i} className="text-slate-950 py-2 px-4 text-sm font-mono">
-                                {shoppingItem}
+                                {shoppingItem.name}
                             </li>
                         ))}
                     </ul>
