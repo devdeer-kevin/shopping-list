@@ -65,7 +65,8 @@ export default function NavigationComponent(): ReactElement {
                         <h3 className="text-slate-950 py-2 px-4 text-sm font-bold font-mono">Shopping Items</h3>
                     </div>
                     <ul>
-                        {itemsArray.map((shoppingItem: string, i: Key | null | undefined) => (
+                        {itemsArray.length <= 1 && <li className="text-slate-600 py-2 px-4 text-sm font-mono">no items</li>}
+                        {[...itemsArray].reverse().map((shoppingItem: string, i: Key | null | undefined) => (
                             <li key={i} className="text-slate-950 py-2 px-4 text-sm font-mono">
                                 {shoppingItem}
                             </li>
