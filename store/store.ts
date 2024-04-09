@@ -3,6 +3,7 @@ import { create } from 'zustand'
 // Zustand implementation
 
 export interface Item {
+    // The name of the shopping list item
     name: string
 }
 

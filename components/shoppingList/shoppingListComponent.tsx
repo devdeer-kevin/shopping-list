@@ -1,5 +1,7 @@
 'use client'
 
+import useItemsStore from '../../store/store'
+import store from '../../store/store'
 import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEvent, Key } from 'react'
 
 /**
@@ -10,14 +12,13 @@ import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEve
  * @returns {ReactElement} The Shopping List Component
  */
 export default function ShoppingListComponent(): ReactElement {
+    const store = useItemsStore()
     // State to hold the shopping list array
     const [itemsArray, setItemsArray] = useState([] as string[])
     // State to hold the input value
     const [inputValue, setInputValue] = useState('')
     // State to hold the invalid input
     const [invalidInput, setInvalidInput] = useState(false)
-    // State if the share button is clicked
-    const [clickShare, setClickShare] = useState(false)
     // State of loading
     const [loading, setLoading] = useState(false)
 
@@ -63,8 +64,12 @@ export default function ShoppingListComponent(): ReactElement {
     const fetchURL = async () => {
         // Get the items from the URL and set them in an array
         const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
+        // Convert the urlParams array of strings to an array of Item objects
+        const items = urlParams.map((item: string) => ({ name: item }))
         // Set the items with the items from the URL
         setItemsArray([...urlParams])
+        // Set the items in the store
+        store.items = items
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
@@ -177,13 +182,13 @@ export default function ShoppingListComponent(): ReactElement {
                 </div>
                 <div className="grid grid-flow-row gap-2 font-mono">
                     {loading && <div className="grid grid-flow-col gap-3 animate-spin text-4xl h-9 w-9">🌀</div>}
-                    {[...itemsArray].reverse().map((shoppingItem: string, i: Key | null | undefined) => (
+                    {store.items.map((shoppingItem: { name: string }, i: Key | null | undefined) => (
                         <div key={i} className="grid grid-flow-col gap-3">
                             <input
                                 disabled
                                 className="border-2 border-blue-700 bg-blue-700 p-2 rounded-lg text-slate-950 placeholder:text-slate-950 font-bold"
                                 type="text"
-                                placeholder={shoppingItem}
+                                placeholder={shoppingItem.name}
                             />
                             <button onClick={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
                                 -
