@@ -19,24 +19,6 @@ export default function NavigationComponent(): ReactElement {
     // State of loading
     const [showCart, setShowCart] = useState(false)
 
-    // Method to get the items from the URL and set them in the state
-    const fetchURL = async () => {
-        // Get the items from the URL and set them in an array
-        const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
-        // Convert the urlParams array of strings to an array of Item objects
-        const items = urlParams.map((item: string) => ({ name: item }))
-        // Set the items with the items from the URL
-        setItemsArray([...urlParams])
-        // Set the items in the store
-        store.items = items
-    }
-
-    // Method to get the items from the URL and set them in the state when the component mounts
-    useEffect(() => {
-        // Get the items from the URL and set them in the state
-        fetchURL()
-    }, [])
-
     // Method to copy the URL to the clipboard
     const copyURLToClipboard = () => {
         const url = window.location.href
