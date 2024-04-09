@@ -11,6 +11,7 @@ import useItemsStore from '../../store/store'
  * @returns {ReactElement} The Shopping List Component
  */
 export default function NavigationComponent(): ReactElement {
+    // Use the global items store
     const store = useItemsStore()
     // State to hold the shopping list array
     const [itemsArray, setItemsArray] = useState([] as string[])
