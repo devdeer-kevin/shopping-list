@@ -1,7 +1,6 @@
 'use client'
 
 import useItemsStore from '../../store/store'
-import store from '../../store/store'
 import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEvent, Key } from 'react'
 
 /**
