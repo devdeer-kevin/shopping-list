@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, ReactElement, Key } from 'react'
+import { useState, ReactElement, Key } from 'react'
 import useItemsStore from '../../store/store'
 
 /**
