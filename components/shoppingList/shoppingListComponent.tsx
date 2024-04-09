@@ -11,6 +11,7 @@ import { useState, useEffect, ReactElement, ChangeEvent, KeyboardEvent, MouseEve
  * @returns {ReactElement} The Shopping List Component
  */
 export default function ShoppingListComponent(): ReactElement {
+    // Use the global items store
     const store = useItemsStore()
     // State to hold the shopping list array
     const [itemsArray, setItemsArray] = useState([] as string[])
