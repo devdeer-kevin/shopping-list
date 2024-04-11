@@ -36,6 +36,7 @@ export default function ShoppingListComponent(): ReactElement {
     }
 
     // Method to post to the API
+    //TODO: Save the item to the API when they originate from the URL
     const postToAPI = async (data: string) => {
         setLoading(true)
         await fetch('/api/v1/items', {
