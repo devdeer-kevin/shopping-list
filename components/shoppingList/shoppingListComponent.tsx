@@ -31,6 +31,7 @@ export default function ShoppingListComponent(): ReactElement {
         const data = await response.json()
         const fetchedItems = data.items.map((item: any) => item.name)
         setItemsArray(fetchedItems)
+        store.items = await fetchedItems.map((item: string) => ({ name: item }))
         setLoading(false)
     }
 
@@ -71,14 +72,24 @@ export default function ShoppingListComponent(): ReactElement {
         setItemsArray([...urlParams])
         // Set the items in the store
         store.items = items
+        // Condition to check if the URL has items
+        if (urlParams.length === 0) {
+            return false
+        }
+        return true
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
-        // Get the items from the URL and set them in the state
+        // Check if the URL has items
+        const hasItems = fetchURL()
+        // Condition to check if the URL has items
+        if (!hasItems) {
+            // Fetch the API
+            fetchAPI()
+        }
+        // Fetch the URL
         fetchURL()
-        // Fetch the API
-        fetchAPI()
     }, [])
 
     // Method to handle input change
@@ -183,13 +194,13 @@ export default function ShoppingListComponent(): ReactElement {
                 </div>
                 <div className="grid grid-flow-row gap-2 font-mono">
                     {loading && <div className="grid grid-flow-col gap-3 animate-spin text-4xl h-9 w-9">🌀</div>}
-                    {store.items.map((shoppingItem: { name: string }, i: Key | null | undefined) => (
+                    {itemsArray.map((shoppingItem: string, i: Key | null | undefined) => (
                         <div key={i} className="grid grid-flow-col gap-3">
                             <input
                                 disabled
                                 className="border-2 border-blue-700 bg-blue-700 p-2 rounded-lg text-slate-950 placeholder:text-slate-950 font-bold"
                                 type="text"
-                                placeholder={shoppingItem.name}
+                                placeholder={shoppingItem}
                             />
                             <button onClick={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
                                 -

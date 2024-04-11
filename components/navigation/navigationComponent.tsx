@@ -13,8 +13,6 @@ import useItemsStore from '../../store/store'
 export default function NavigationComponent(): ReactElement {
     // Use the global items store
     const store = useItemsStore()
-    // State to hold the shopping list array
-    const [itemsArray, setItemsArray] = useState([] as string[])
     // State if the share button is clicked
     const [clickShare, setClickShare] = useState(false)
     // State of loading
@@ -54,7 +52,7 @@ export default function NavigationComponent(): ReactElement {
                         <h3 className="text-slate-950 py-2 px-4 text-sm font-bold font-mono">Shopping Items</h3>
                     </div>
                     <ul>
-                        {itemsArray.length <= 1 && <li className="text-slate-600 py-2 px-4 text-sm font-mono">no items</li>}
+                        {store.items.length <= 1 && <li className="text-slate-600 py-2 px-4 text-sm font-mono">no items</li>}
                         {store.items.map((shoppingItem: { name: string }, i: Key | null | undefined) => (
                             <li key={i} className="text-slate-950 py-2 px-4 text-sm font-mono">
                                 {shoppingItem.name}
