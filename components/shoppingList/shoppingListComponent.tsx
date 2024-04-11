@@ -66,7 +66,9 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to get the items from the URL and set them in the state
     const fetchURL = async () => {
         // Get the items from the URL and set them in an array
-        const urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
+        let urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
+        // Filter the empty strings from the array
+        urlParams = urlParams.filter((item) => item !== '')
         // Convert the urlParams array of strings to an array of Item objects
         const items = urlParams.map((item: string) => ({ name: item }))
         // Set the items with the items from the URL
@@ -75,21 +77,14 @@ export default function ShoppingListComponent(): ReactElement {
         store.items = items
         // Condition to check if the URL has items
         if (urlParams.length === 0) {
-            return false
+            // If the URL has no items, fetch the items from the API
+            fetchAPI()
         }
-        return true
     }
 
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
-        // Check if the URL has items
-        const hasItems = fetchURL()
-        // Condition to check if the URL has items
-        if (!hasItems) {
-            // Fetch the API
-            fetchAPI()
-        }
-        // Fetch the URL
+        // Fetch the items from the URL
         fetchURL()
     }, [])
 
