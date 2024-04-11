@@ -57,6 +57,7 @@ export default function ShoppingListComponent(): ReactElement {
             },
             body: JSON.stringify({ name: data }),
         })
+        store.removeItem(data)
         setLoading(false)
     }
 
