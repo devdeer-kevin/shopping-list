@@ -79,7 +79,7 @@ export default function ShoppingListComponent(): ReactElement {
         return urlParams
     }
 
-    // Logic to fetch the items fromt the API if the URL has no items
+    // Logic to fetch the items from the API if the URL has no items
     const fetchLogic = async () => {
         // Get the items from the URL
         let urlParams = await fetchURL()
