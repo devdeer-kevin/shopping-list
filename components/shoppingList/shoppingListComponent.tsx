@@ -64,7 +64,7 @@ export default function ShoppingListComponent(): ReactElement {
     }
 
     // Method to get the items from the URL and set them in the state
-    const fetchURL = async () => {
+    const fetchData = async () => {
         // Get the items from the URL and set them in an array
         let urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
         // Filter the empty strings from the array
@@ -85,7 +85,7 @@ export default function ShoppingListComponent(): ReactElement {
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
         // Fetch the items from the URL
-        fetchURL()
+        fetchData()
     }, [])
 
     // Method to handle input change
@@ -120,7 +120,7 @@ export default function ShoppingListComponent(): ReactElement {
         // Replace the URL
         window.history.replaceState(null, '', url.toString())
         // Set items from the URL in the state
-        fetchURL()
+        fetchData()
     }
 
     // Method to add item to the shopping list array
