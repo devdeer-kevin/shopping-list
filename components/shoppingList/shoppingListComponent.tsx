@@ -64,17 +64,9 @@ export default function ShoppingListComponent(): ReactElement {
     }
 
     // Method to get the items from the URL and set them in the state
-    const fetchURL = () => {
+    const fetchURL = async () => {
         // Get the items from the URL and set them in an array
         let urlParams = new URLSearchParams(window.location.search).getAll('items').join(',').split(',')
-        // Return the urlParams array
-        return urlParams
-    }
-
-    // Logic to fetch the items from the API if the URL has no items
-    const fetchData = async () => {
-        // Get the items from the URL
-        let urlParams = fetchURL()
         // Filter the empty strings from the array
         urlParams = urlParams.filter((item) => item !== '')
         // Convert the urlParams array of strings to an array of Item objects
@@ -83,7 +75,15 @@ export default function ShoppingListComponent(): ReactElement {
         setItemsArray([...urlParams])
         // Set the items in the store
         store.items = items
-        // Condition to check if the URL has items
+        // Return the urlParams array
+        return urlParams
+    }
+
+    // Logic to fetch the items fromt the API if the URL has no items
+    const fetchLogic = async () => {
+        // Get the items from the URL
+        let urlParams = await fetchURL()
+        // Fetch the items from the URL
         if (urlParams.length === 0) {
             // If the URL has no items, fetch the items from the API
             fetchAPI()
@@ -92,8 +92,8 @@ export default function ShoppingListComponent(): ReactElement {
 
     // Method to get the items from the URL and set them in the state when the component mounts
     useEffect(() => {
-        // Fetch the items from the URL
-        fetchData()
+        // Logic to fetch the items
+        fetchLogic()
     }, [])
 
     // Method to handle input change
@@ -128,7 +128,7 @@ export default function ShoppingListComponent(): ReactElement {
         // Replace the URL
         window.history.replaceState(null, '', url.toString())
         // Set items from the URL in the state
-        fetchData()
+        fetchURL()
     }
 
     // Method to add item to the shopping list array
