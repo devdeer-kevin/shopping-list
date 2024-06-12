@@ -183,7 +183,7 @@ export default function ShoppingListComponent(): ReactElement {
                                 onKeyDown={handleKeyDown}
                                 onFocus={() => setInvalidInput(false)}
                             />
-                            <button onClick={addItem} className="text-yellow-500 border-2 border-yellow-500 p-2 rounded-lg w-10">
+                            <button onMouseDown={addItem} className="text-yellow-500 border-2 border-yellow-500 p-2 rounded-lg w-10">
                                 +
                             </button>
                         </div>
@@ -206,7 +206,7 @@ export default function ShoppingListComponent(): ReactElement {
                                 type="text"
                                 placeholder={shoppingItem}
                             />
-                            <button onClick={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
+                            <button onMouseDown={removeItem} className="text-slate-950 border-2 border-blue-700 bg-blue-700 p-2 rounded-lg w-10">
                                 -
                             </button>
                         </div>
