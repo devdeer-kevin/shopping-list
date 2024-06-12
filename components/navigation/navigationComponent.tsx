@@ -38,10 +38,10 @@ export default function NavigationComponent(): ReactElement {
                     <h2 className="sm:text-3xl text-2xl text-red-400 sm:text-left font-mono font-thin">Shopping List</h2>
                 </div>
                 <div className="flex flex-row gap-4">
-                    <button onClick={copyURLToClipboard} className="text-slate-950 bg-red-400 py-2 px-4 rounded-lg text-sm">
+                    <button onMouseDown={copyURLToClipboard} className="text-slate-950 bg-red-400 py-2 px-4 rounded-lg text-sm">
                         {clickShare ? '✅ URL copied' : '🔗 Copy URL'}
                     </button>
-                    <button onClick={() => setShowCart(!showCart)} className="text-slate-950 bg-slate-50 py-2 px-4 rounded-lg text-sm">
+                    <button onMouseDown={() => setShowCart(!showCart)} className="text-slate-950 bg-slate-50 py-2 px-4 rounded-lg text-sm">
                         🛒 Cart
                     </button>
                 </div>
